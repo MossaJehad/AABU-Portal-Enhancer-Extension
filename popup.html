@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Changer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <form id="maincontainer">
+        <p class="pborder label">معلومات البوابة</p>
+        <div class="control">
+            <div class="is-flex is-grouped">
+                <div class="field">
+                    <label>الرقم الجامعي</label>
+                    <div class="control">
+                    <input class="input is-small is-rounded" type="text" id="studentId" name="studentId" placeholder="الرقم الجامعي">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>كلمة السر</label>
+                    <div class="control">
+                        <input class="input is-small is-rounded" type="password" id="password" name="password" placeholder="كلمة السر">
+                    </div>
+                </div>
+            </div>
+            <button disabled type="submit" class="button is-success is-small is-fullwidth is-rounded" id="SaveButton">Save</button>
+            <div id="successMessage" class="help is-success is-hidden is-flex is-align-items-center is-justify-content-center">
+                تم الحفظ بنجاح
+            </div>
+        </div>
+    </form>
+    <div class="container p-3">
+        <a class="button is-success is-outlined is-small is-fullwidth is-rounded" target="_blank" href="https://student.aabu.edu.jo/nreg//welcome.jsp">
+            إلى البوابة
+        </a>
+        <div class="cont">
+            <label class="checkbox checkbox-label">
+                <input type="checkbox" class="switch" id="autologin">
+                تسجيل الدخول التلقائي
+            </label>
+        </div>
+        <div class="cont">
+            <label class="checkbox checkbox-label">
+                <input type="checkbox" class="switch applyBetterUI" id="applyBetterUI">
+                تعديل واجهة البوابة
+            </label>
+        </div>
+        <div class="cont">
+            <label class="checkbox checkbox-label">
+                <input type="checkbox" class="switch" id="darkModeCheckbox">
+                الوضع الليلي
+            </label>
+        </div>
+    </div>
+    <div class="container has-text-centered is-size-7">
+        <h2>Portal Enhancer</h2>
+        <h1>
+            تطوير :
+            <a href="https://github.com/MossaJehad" target="_blank">موسى جهاد</a>    
+        </h1>
+    </div>
+    
+    <script src="popup.js"></script>
+    <script src="autologin.js"></script>
+    <script src="betterui.js"></script>
+    <script src="darkMode.js"></script>
+
+</body>
+</html>

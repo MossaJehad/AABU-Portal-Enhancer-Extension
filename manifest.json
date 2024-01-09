@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+  "name": "Portal Enhancer",
+  "version": "1.0",
+  "description": "Portal Enhancer for AABU student portal",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "64": "images/icon64.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "https://student.aabu.edu.jo/nreg/*",
+    "tabs",
+    "nativeMessaging"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://student.aabu.edu.jo/nreg/*"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      }
+    }
+  },
+  "scripts": ["popup.js"],
+  "web_accessible_resources": ["popup.html", "popup.css", "calculator/calc.html"]
+}

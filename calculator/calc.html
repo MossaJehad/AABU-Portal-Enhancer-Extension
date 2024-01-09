@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <title>GPA/CGPA Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+    body {
+      font-family: 'Tajawal', 'Rubik', sans-serif;
+    }
+  </style>
+</head>
+
+<body dir="rtl">
+  <main class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center m-3">
+    <div id="calculator" class="content">
+      <div class="page-title is-flex is-flex-direction-row is-align-items-center is-justify-content-center m-2 p-2"
+        style="border-bottom: 2px solid #a7a7a730;">
+        <?xml version="1.0" ?><svg fill="none" height="40" stroke-width="1.5" viewBox="0 0 24 24" width="40"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1 21V3C1 1.89543 1.89543 1 3 1H21C22.1046 1 23 1.89543 23 3V21C23 22.1046 22.1046 23 21 23H3C1.89543 23 1 22.1046 1 21Z"
+            stroke="currentColor" stroke-width="1.5" />
+          <path d="M15 7L17 7H19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M15 15.5H17L19 15.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M15 18.5H17H19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M5 7H7M9 7H7M7 7V5M7 7V9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+          <path
+            d="M5.58609 18.4142L7.0003 17M8.41452 15.5858L7.0003 17M7.0003 17L5.58609 15.5858M7.0003 17L8.41452 18.4142"
+            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <h1 class="mr-2 mt-2 is-size-2">حاسبة المعدل</h1>
+      </div>
+      <div class="column is-flex is-flex-direction-column is-justify-content-center">
+        <div class="field">
+          <ul class="old-gpa">
+            <label class="label">المعدل التراكمي السابق (اختياري)</label>
+            <div class="columns is-flex is-flex-direction-row my-2 is-align-items-center">
+              <li class="column">
+                <input id="currentGPA" value="" class="input" type="number" max="4" min="0" placeholder="المعدل السابق">
+              </li>
+              <li class="column">
+                <input id="currentHours" class="input" type="number" max="164" placeholder="عدد الساعات">
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
+      <div class="column is-flex is-flex-direction-column is-justify-content-center">
+        <div class="field">
+          <label class="label">مواد الفصل</label>
+          <ul id="markEntries" class="mark-entries-body">
+            <li id="subject" class="is-flex is-flex-direction-row is-justify-content-center is-align-content-center is-align-items-center">
+              <input type="text" class="course-name input" placeholder="اسم المادة" value="">
+              <input type="number" class="hours input" min="0" max="10" placeholder="الساعات" value="">
+              <div id="newMark" class="grade select" required="required">
+                <select required>
+                  <option value="" selected="selected" disabled="disabled" hidden="hidden">الرمز</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+              <div class="select" id="previousMark">
+                <select class="old-grade select" required="required" disabled>
+                  <option value="" selected="selected" disabled="disabled" hidden="hidden">الرمز السابق</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="F">F</option>
+                </select>
+              </div>
+              <div id="delete" class="delete mr-4">×</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+    </div>
+    <div class="m-2">
+          <button id="grabData" class="button is-info is-rounded">جلب العلامات من البوابة</button>
+          <button id="addSubject" class="button is-primary is-rounded">إضافة مادة</button>
+          <button id="calculateGPA" class="button is-success is-rounded">حساب المعدل</button>
+          <button id="reset" class="button is-danger is-rounded">محو الكل</button>
+      </div>
+      <div class="container m-4 mb-5 p-2 pb-6 is-flex is-flex-direction-row" style="border-bottom: 2px solid #a7a7a730;">
+        <div class="is-flex is-flex-direction-column m-4 has-text-centered">
+          <p class="m-2 is-size-5">المعدل الفصلي:</p>
+          <span id="GPA" class=" is-size-5"></span>
+          <p class="is-size-6 my-3">عدد الساعات الداخلة في المعدل:</p>
+          <span class="is-size-6" id="TotalHGPA"></span>
+        </div>
+        <div class="is-flex is-flex-direction-column m-4 has-text-centered">
+          <p class="m-2 is-size-5">المعدل التراكمي:</p>
+          <span id="CGPA" class="is-size-5"></span>
+          <p class="is-size-6 my-3">عدد الساعات الداخلة في المعدل:</p>
+          <span class="is-size-6" id="TotalHCGPA"></span>
+        </div>
+      </div>
+      <div id="notes-container" class="content mt-2 pb-4">
+       <div class="is-flex my-4 is-flex-direction-row is-align-content-center is-align-items-center">
+        <?xml version="1.0" ?><svg height="24" viewBox="0 0 48 48" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48h-48z" fill="none"/><path d="M22 34h4v-12h-4v12zm2-30c-11.05 0-20 8.95-20 20s8.95 20 20 20 20-8.95 20-20-8.95-20-20-20zm0 36c-8.82 0-16-7.18-16-16s7.18-16 16-16 16 7.18 16 16-7.18 16-16 16zm-2-22h4v-4h-4v4z"/></svg>
+        <span class="is-size-4">ملاحظات:</span>
+       </div>
+        <ul style="list-style-type: circle">
+          <li>هذه الأداة مصممة لحساب المعدل الدراسي وفقًا لتوجيهات جامعة آل البيت. </li>
+          <li>مواد ناجح/راسب لا تدخل في حساب المعدل ولا يتم احتساب ساعاتها. </li>
+          <li>عليك إدخال الرمز السابق للمواد المعادة. </li>
+          <li>الساعات الداخلة في حساب المعدل التراكمي موجودة في البوابة &gt; الوضع الاكاديمي. </li>
+        </ul>
+      </div>
+      <footer class="has-text-centered mt-4 p-4" style="border-top: 2px solid #a7a7a730;">
+        <div class="is-flex is-flex-direction-row is-justify-content-center is-align-items-center">
+          <p class="is-size-6">
+            تم تطوير هذه الأداة بواسطة <a href='https://github.com/MossaJehad'>Mossa Jehad</a>
+            <br>مصدر الأداة متاح على <a href='https://github.com/MossaJehad/AABU-Portal-Enhancer-Extension'>Github</a>
+          </p>
+        </div>
+      </footer>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

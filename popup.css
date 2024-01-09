@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+body {
+    min-width: 300px;
+    padding: 10px;
+    text-align: right;
+    direction: rtl;
+    font-family: 'Tajawal', 'Rubik', sans-serif;
+}
+#maincontainer {
+    background-color: #eeeeee;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+button:hover {
+    background-color: #3c3e40;
+}
+
+label.label {
+    text-align: right; 
+}
+.control {
+    margin-top: 10px; 
+}
+
+.button {
+    margin-bottom: 5px;
+}
+.pborder {
+    border-bottom: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 10px;
+}
+.cont {
+    border-bottom: 1px solid #aaaaaa72;
+}
+
+
+/* Style for the switch */
+
+.checkbox-label {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem auto;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    width: 32px;
+    height: 18px;
+    border-radius: 20px;
+    outline: none;
+    background-color: #aaa;
+    -webkit-appearance: none;
+}
+
+.switch::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    height: 1.25rem;
+    width: 1.25rem;
+    background-color: whitesmoke;
+    transition: left .3s;
+}
+
+.switch:checked {
+    background-color: #48c78e;
+}
+
+.switch:checked::after {
+    left: 70%;
+}
