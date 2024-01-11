@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
   var betterUI = document.querySelector('.applyBetterUI');
   var darkMode = document.querySelector('.darkMode');
 
+  var passwordInput = document.getElementById('password');
+  var togglePassword = document.querySelector('.toggle-password');
+
+  togglePassword.addEventListener('click', function () {
+      var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+
+      togglePassword.classList.toggle('fa-eye');
+      togglePassword.classList.toggle('fa-eye-slash');
+  });
+
   if (storedStudentId) {
     studentIdInput.value = storedStudentId;
   }

@@ -77,3 +77,16 @@ label.label {
 .switch:checked::after {
     left: 70%;
 }
+
+.field-icon {
+    cursor: pointer;
+    position: absolute;
+    z-index: 2;
+    margin-right: 6rem;
+  }
+
+.pass {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
