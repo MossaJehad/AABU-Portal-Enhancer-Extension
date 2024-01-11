@@ -37,8 +37,12 @@ label.label {
     border-bottom: 1px solid #aaaaaa72;
 }
 
-
-/* Style for the switch */
+#studentId::-webkit-outer-spin-button,
+#studentId::-webkit-inner-spin-button,
+input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
 
 .checkbox-label {
     display: flex;
