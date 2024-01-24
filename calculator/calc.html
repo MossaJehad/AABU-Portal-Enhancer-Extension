@@ -15,7 +15,7 @@
 </head>
 
 <body dir="rtl">
-  <main class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center m-3">
+  <main class="is-flex is-flex-direction-column is-align-items-center is-justify-content-center">
     <div id="calculator" class="content">
       <div class="page-title is-flex is-flex-direction-row is-align-items-center is-justify-content-center m-2 p-2"
         style="border-bottom: 2px solid #a7a7a730;">
@@ -54,9 +54,9 @@
           <label class="label">مواد الفصل</label>
           <ul id="markEntries" class="mark-entries-body">
             <li id="subject" class="is-flex is-flex-direction-row is-justify-content-center is-align-content-center is-align-items-center">
-              <input type="text" class="course-name input" placeholder="اسم المادة" value="">
-              <input type="number" class="hours input" min="0" max="10" placeholder="الساعات" value="">
-              <div id="newMark" class="grade select" required="required">
+              <input type="text" class="course-name input m-1" placeholder="اسم المادة" value="">
+              <input type="number" class="hours input m-1" min="0" max="10" placeholder="الساعات" value="">
+              <div id="newMark" class="grade select m-1" required="required">
                 <select required>
                   <option value="" selected="selected" disabled="disabled" hidden="hidden">الرمز</option>
                   <option value="A+">A+</option>
@@ -73,7 +73,7 @@
                   <option value="F">F</option>
                 </select>
               </div>
-              <div class="select" id="previousMark">
+              <div class="select m-1" id="previousMark">
                 <select class="old-grade select" required="required" disabled>
                   <option value="" selected="selected" disabled="disabled" hidden="hidden">الرمز السابق</option>
                   <option value="C+">C+</option>
@@ -84,7 +84,7 @@
                   <option value="F">F</option>
                 </select>
               </div>
-              <div id="delete" class="delete mr-4">×</div>
+              <div id="delete" class="delete mr-4 m-1">×</div>
             </li>
           </ul>
         </div>

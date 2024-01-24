@@ -21,6 +21,70 @@ document.addEventListener("DOMContentLoaded", function () {
   let calculateGPAButton = document.getElementById("calculateGPA");
   calculateGPAButton.addEventListener("click", calculateTheGPA);
 
+  
+function applyDarkModeStyles() {
+  document.querySelector('body').style.backgroundColor = '#242424';
+  document.querySelector('body').style.color = '#fff';
+
+  let header = document.querySelector('h1');
+  let allSpans = document.querySelectorAll('span');
+  let allPara = document.querySelectorAll('p');
+  let allLabels = document.querySelectorAll('label');
+  let allInputs = document.querySelectorAll('input');
+  let allLis = document.querySelectorAll('li');
+  let allLinks = document.querySelectorAll('a');
+  let div = document.querySelectorAll('div');
+
+  header.style.color = '#fff';
+  allSpans.forEach((s) => { s.style.color = '#fff' });
+  allPara.forEach((p) => { p.style.color = '#fff' });
+  allLabels.forEach((la) => { la.style.color = '#fff' });
+  allInputs.forEach((i) => { i.style.color = '#fff' });
+  allLis.forEach((l) => { l.style.color = '#fff' });
+  div.forEach((d) => { d.style.color = '#fff' });
+  allLinks.forEach((a) => { a.style.color = '#209cee' });
+}
+
+function removeDarkModeStyles() {
+  document.querySelector('body').style.backgroundColor = '';
+  document.querySelector('body').style.color = '';
+
+  let header = document.querySelector('h1');
+  let allSpans = document.querySelectorAll('span');
+  let allPara = document.querySelectorAll('p');
+  let allLabels = document.querySelectorAll('label');
+  let allInputs = document.querySelectorAll('input');
+  let allLi = document.querySelectorAll('li');
+  let sel = document.querySelectorAll('select');
+  let div = document.querySelectorAll('div');
+
+  header.style.color = '';
+  allSpans.forEach((s) => { s.style.color = '' });
+  allPara.forEach((p) => { p.style.color = '' });
+  allLabels.forEach((la) => { la.style.color = '' });
+  allInputs.forEach((i) => { i.style.color = '' });
+  allLi.forEach((l) => { l.style.color = '' });
+  div.forEach((d) => { d.style.color = '' });
+}
+
+chrome.storage.local.get('darkModeEnabled', function (data) {
+  if (data.darkModeEnabled) {
+      applyDarkModeStyles();
+  }
+});
+
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  if (namespace === 'local' && 'darkModeEnabled' in changes) {
+      const newDarkModeState = changes.darkModeEnabled.newValue;
+      if (newDarkModeState) {
+          applyDarkModeStyles();
+      } else {
+          removeDarkModeStyles();
+      }
+  }
+});
+
+
 function fetchData() {
   fetch("https://student.aabu.edu.jo/nreg/StdStatus_view.jsp")
     .then(response => response.text())

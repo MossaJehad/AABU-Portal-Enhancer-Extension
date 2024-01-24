@@ -6,6 +6,20 @@ if (window.location.href.startsWith('https://student.aabu.edu.jo/nreg//showPic.j
     }
 }
 
+chrome.storage.local.get('darkModeEnabled', function(data) {
+    if (data.darkModeEnabled) {
+        document.querySelectorAll('*').forEach((element) => { 
+            if (element.tagName !== 'IMG') {
+                element.originalBackgroundColor = window.getComputedStyle(element).backgroundColor;
+                element.style.backgroundColor = '#222';
+                element.style.color = '#fff';
+            } else {
+                element.style.backgroundColor = '';
+                element.style.color = '';
+            }
+        });
+    }
+})
 
 chrome.runtime.sendMessage({ action: 'getAutoLoginState' }, function (response) {
         chrome.storage.sync.get(['studentId', 'studentPass', 'autoLogin'], function (result) {
@@ -65,15 +79,6 @@ function autoSelectMiddleValueAndClickNext() {
 if (isExamPage()) {
     autoSelectMiddleValueAndClickNext();
 }
-
-chrome.storage.local.get('darkModeEnabled', function(data) {
-    if (data.darkModeEnabled) {
-        document.querySelectorAll("*").forEach((element) => {
-            element.style.backgroundColor = "#222";
-            element.style.color = "#fff";
-        });
-    }
-});
 
 chrome.storage.local.get('UIEnabled', function(data) {
     if (data.UIEnabled) {
