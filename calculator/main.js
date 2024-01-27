@@ -55,7 +55,6 @@ function removeDarkModeStyles() {
   let allLabels = document.querySelectorAll('label');
   let allInputs = document.querySelectorAll('input');
   let allLi = document.querySelectorAll('li');
-  let sel = document.querySelectorAll('select');
   let div = document.querySelectorAll('div');
 
   header.style.color = '';

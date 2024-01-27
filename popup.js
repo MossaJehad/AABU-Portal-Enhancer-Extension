@@ -14,6 +14,76 @@ document.addEventListener('DOMContentLoaded', function () {
   var passwordInput = document.getElementById('password');
   var togglePassword = document.querySelector('.toggle-password');
 
+  ///////
+function applyDarkModeStyles() {
+    let bdy = document.querySelector('body');
+    bdy.style.backgroundColor = '#242424';
+    bdy.style.color = '#eee';
+
+    let form = document.querySelector('#maincontainer')
+    if(form){
+      form.style.color = '#eee'
+      form.style.backgroundColor = '#343434'
+    }
+    let p = document.querySelector('.pborder')
+    if(p){
+      p.style.color = '#eee'
+      p.style.backgroundColor = '#343434'
+    }
+    let a = document.querySelector('#link')
+    if(a){
+      a.style.color = '#209cee'
+    }
+    let span = document.querySelector('span')
+    if(span){
+      span.style.color = '#777'
+    }
+  
+}
+
+function removeDarkModeStyles() {
+  let bdy = document.querySelector('body');
+    bdy.style.backgroundColor = '';
+    bdy.style.color = '';
+
+    let form = document.querySelector('#maincontainer')
+    if(form){
+      form.style.color = ''
+      form.style.backgroundColor = ''
+    }
+    let p = document.querySelector('.pborder')
+    if(p){
+      p.style.color = ''
+      p.style.backgroundColor = ''
+    }
+    let a = document.querySelector('#link')
+    if(a){
+      a.style.color = ''
+    }
+    let span = document.querySelector('span')
+    if(span){
+      span.style.color = ''
+    }
+}
+
+chrome.storage.local.get('darkModeEnabled', function (data) {
+  if (data.darkModeEnabled) {
+      applyDarkModeStyles();
+  }
+});
+
+chrome.storage.onChanged.addListener(function (changes, namespace) {
+  if (namespace === 'local' && 'darkModeEnabled' in changes) {
+      const newDarkModeState = changes.darkModeEnabled.newValue;
+      if (newDarkModeState) {
+          applyDarkModeStyles();
+      } else {
+          removeDarkModeStyles();
+      }
+  }
+});
+  ///////
+
   togglePassword.addEventListener('click', function () {
       var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
       passwordInput.setAttribute('type', type);
