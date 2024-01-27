@@ -34,7 +34,8 @@ function applyDarkModeStyles() {
   let allLis = document.querySelectorAll('li');
   let allLinks = document.querySelectorAll('a');
   let div = document.querySelectorAll('div');
-
+  let svg = document.querySelector('#svg');
+  svg.setAttribute('fill', '#fff')
   header.style.color = '#fff';
   allSpans.forEach((s) => { s.style.color = '#fff' });
   allPara.forEach((p) => { p.style.color = '#fff' });
@@ -56,7 +57,8 @@ function removeDarkModeStyles() {
   let allInputs = document.querySelectorAll('input');
   let allLi = document.querySelectorAll('li');
   let div = document.querySelectorAll('div');
-
+  let svg = document.querySelector('#svg');
+  svg.setAttribute('fill', '#4a4a4a')
   header.style.color = '';
   allSpans.forEach((s) => { s.style.color = '' });
   allPara.forEach((p) => { p.style.color = '' });
