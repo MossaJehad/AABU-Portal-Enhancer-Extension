@@ -40,7 +40,7 @@ function applyDarkModeStyles() {
   allSpans.forEach((s) => { s.style.color = '#fff' });
   allPara.forEach((p) => { p.style.color = '#fff' });
   allLabels.forEach((la) => { la.style.color = '#fff' });
-  allInputs.forEach((i) => { i.style.color = '#fff' });
+  allInputs.forEach((i) => { i.style.color = '#000' });
   allLis.forEach((l) => { l.style.color = '#fff' });
   div.forEach((d) => { d.style.color = '#fff' });
   allLinks.forEach((a) => { a.style.color = '#209cee' });
