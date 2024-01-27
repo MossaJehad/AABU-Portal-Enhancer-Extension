@@ -40,10 +40,10 @@
             <label class="label">المعدل التراكمي السابق (اختياري)</label>
             <div class="columns is-flex is-flex-direction-row my-2 is-align-items-center">
               <li class="column">
-                <input id="currentGPA" value="" class="input" type="number" max="4" min="0" placeholder="المعدل السابق">
+                <input id="currentGPA" value="" class="numInput input" type="number" max="4" min="0" placeholder="المعدل السابق">
               </li>
               <li class="column">
-                <input id="currentHours" class="input" type="number" max="164" placeholder="عدد الساعات">
+                <input id="currentHours" class="numInput input" type="number" max="164" min="0" placeholder="عدد الساعات">
               </li>
             </div>
           </ul>
@@ -55,7 +55,7 @@
           <ul id="markEntries" class="mark-entries-body">
             <li id="subject" class="is-flex is-flex-direction-row is-justify-content-center is-align-content-center is-align-items-center">
               <input type="text" class="course-name input m-1" placeholder="اسم المادة" value="">
-              <input type="number" class="hours input m-1" min="0" max="10" placeholder="الساعات" value="">
+              <input type="number" class="numInput hours input m-1" min="0" max="6" placeholder="الساعات" value="">
               <div id="newMark" class="grade select m-1" required="required">
                 <select required>
                   <option value="" selected="selected" disabled="disabled" hidden="hidden">الرمز</option>

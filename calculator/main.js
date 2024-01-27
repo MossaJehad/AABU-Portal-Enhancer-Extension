@@ -21,6 +21,20 @@ document.addEventListener("DOMContentLoaded", function () {
   let calculateGPAButton = document.getElementById("calculateGPA");
   calculateGPAButton.addEventListener("click", calculateTheGPA);
 
+  let numInputs = document.querySelectorAll(".numInput");
+  numInputs.forEach((numInput) => {
+    numInput.addEventListener("blur", function() {
+      var inputValue = parseFloat(numInput.value);
+      var min = parseFloat(numInput.min);
+      var max = parseFloat(numInput.max);
+
+      if (isNaN(inputValue) || inputValue < min) {
+          numInput.value = min;
+      } else if (inputValue > max) {
+          numInput.value = max;
+      }
+    });
+  })
   
 function applyDarkModeStyles() {
   document.querySelector('body').style.backgroundColor = '#242424';
@@ -260,5 +274,5 @@ function fetchData() {
         return NaN;
     }
   }
-  
+
 });
