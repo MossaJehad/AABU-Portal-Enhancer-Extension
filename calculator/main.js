@@ -6,11 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const CGPAOutput = document.getElementById("CGPA");
   const TotalHGPA = document.getElementById('TotalHGPA')
   const TotalHCGPA = document.getElementById('TotalHCGPA')
+  const oldGrade = document.querySelector('select.old-grade')
   document.getElementById("grabData").addEventListener("click", fetchData);
-
-  newMarkSelect.addEventListener("change", updatePreviousMarkState);
-  prevGPA.addEventListener("input", updatePreviousMarkState);
-  prevHours.addEventListener("input", updatePreviousMarkState);
 
   let addSubjectBtn = document.getElementById("addSubject");
   addSubjectBtn.addEventListener("click", addSubject);
@@ -35,7 +32,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   })
-  
+
+  var elements = document.querySelectorAll('.numInput');
+  elements.forEach(function(element) {
+    element.addEventListener('input', function() {
+      if (prevGPA.value >= 1 && prevHours.value >= 1) {
+        oldGrade.removeAttribute("disabled");
+      } else {
+        oldGrade.setAttribute("disabled", "disabled");
+      }
+    });
+  });
+
 function applyDarkModeStyles() {
   document.querySelector('body').style.backgroundColor = '#242424';
   document.querySelector('body').style.color = '#fff';
@@ -122,21 +130,6 @@ function fetchData() {
     });
 }
   
-  function updatePreviousMarkState() {
-    const newMarkSelect = this.closest("li").querySelector(".grade select");
-    const previousMarkSelect = this.closest("li").querySelector(".old-grade");
-    const prevGPA = document.getElementById("currentGPA");
-    const prevHours = document.getElementById("currentHours");
-    const hoursInput = this.closest("li").querySelector(".hours");
-
-    if (prevGPA.value.trim() !== "" && prevHours.value.trim() !== "") {
-      previousMarkSelect.removeAttribute("disabled");
-    } else {
-      previousMarkSelect.setAttribute("disabled", "");
-    }
-  }
-
-  
   function addSubject() {
     const entryTemplate = document.querySelector(".mark-entries-body li");
     if (!entryTemplate) {
@@ -173,11 +166,12 @@ function fetchData() {
     let courseNameInputs = document.querySelectorAll(".course-name");
     let hoursInputs = document.querySelectorAll(".hours");
     let gradeSelects = document.querySelectorAll(".grade select");
-    let oldGradeSelects = document.querySelectorAll(".old-grade");
     CGPAOutput.textContent = ''
     GPAOutput.textContent = ''
     TotalHCGPA.textContent = ''
     TotalHGPA.textContent = ''
+    prevGPA.value = 0
+    prevHours.value = 0
 
     courseNameInputs.forEach((input) => {
       input.value = "";
@@ -191,8 +185,8 @@ function fetchData() {
       select.value = "";
     });
 
-    oldGradeSelects.forEach((select) => {
-      select.value = "";
+    oldGrade.forEach((select) => {
+      select.value = "الرمز السابق";
     });
   }
   
@@ -241,7 +235,18 @@ function fetchData() {
       CGPAOutput.textContent = ` ${standerCGPA.toFixed(2)}`;
       TotalHCGPA.textContent = `${totalHours}`
     }
-  
+    console.log(`
+            PrevGPA:${prevGPA.value}
+            PrevHours:${prevHours.value}
+            TotalGradePoints:${totalGradePoints}
+            TotalHours:${totalHours}
+            TotalOldGradePoints:${totalOldGradePoints}
+            TotalOldHours:${totalOldHours}
+            GPA:${GPA}
+            CGPA:${regularCGPA}
+            TotalHGPA:${TotalHGPA.textContent}
+            TotalHCGPA:${TotalHCGPA.textContent}
+    `)
   }
 
   function getGradePoint(grade) {
@@ -267,9 +272,9 @@ function fetchData() {
       case "D+":
         return 1.75;
       case "D":
-        return 1.0;
+        return 1.5;
       case "F":
-        return 0.0;
+        return 1.0;
       default:
         return NaN;
     }
