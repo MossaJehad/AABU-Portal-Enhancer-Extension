@@ -228,7 +228,7 @@ function fetchData() {
     let regularCGPA = GPA;
 
     if (prevGPA.value && prevHours.value && totalOldGradePoints > 0) {
-      const restudiedCGPA = ((parseFloat(prevGPA.value) * parseFloat(prevHours.value)) - totalOldGradePoints + totalGradePoints) / (parseFloat(prevHours.value) + (totalHours - totalOldHours));
+      const restudiedCGPA = ((parseFloat(prevGPA.value) * parseFloat(prevHours.value)) + totalGradePoints) / (parseFloat(prevHours.value) + (totalHours - totalOldHours));
       CGPAOutput.textContent = ` ${restudiedCGPA.toFixed(2)}`;
       TotalHCGPA.textContent = `${parseFloat(prevHours.value) + (totalHours - totalOldHours)}`
       const gradeEstimate = getCGPAEstimate(restudiedCGPA);
