@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
-function updateDarkMode(darkModeEnabled) {
+async function updateDarkMode(darkModeEnabled) {
     var code = darkModeEnabled
     ? `document.querySelectorAll('*').forEach((element) => { 
         if (element.tagName !== 'IMG') {
@@ -54,8 +54,8 @@ function updateDarkMode(darkModeEnabled) {
             element.style.backgroundColor = '';
         }
     });`;
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       var tabId = tabs[0].id;
-      chrome.tabs.executeScript(tabId, { code: code });
+      chrome.scripting.executeScript(tabId, { code: code });
   });
 }

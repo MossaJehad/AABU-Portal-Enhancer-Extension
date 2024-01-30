@@ -1,10 +1,11 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Portal Enhancer",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Portal Enhancer for AABU student portal",
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
+    "default_title": "Portal Enhancer",
     "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",
@@ -14,14 +15,16 @@
     }
   },
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "permissions": [
     "storage",
-    "https://student.aabu.edu.jo/nreg/*",
     "tabs",
     "nativeMessaging"
+  ],
+  "host_permissions": [
+    "https://student.aabu.edu.jo/nreg/*",
+    "*/calculator/calc.html"
   ],
   "icons": {
     "16": "images/icon16.png",
@@ -32,9 +35,8 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://student.aabu.edu.jo/nreg/*"],
       "js": ["contentScript.js"],
-      "run_at": "document_idle"
+      "matches": ["https://student.aabu.edu.jo/nreg/*"]
     }
   ],
   "commands": {
@@ -45,5 +47,9 @@
     }
   },
   "scripts": ["popup.js"],
-  "web_accessible_resources": ["popup.html", "popup.css", "calculator/calc.html"]
+  "web_accessible_resources": [{
+    "resources": ["popup.html", "popup.css", "calculator/calc.html"],
+    "matches": ["*://*/*"],
+    "suggested_key": ["suggested_key"]
+  }]
 }

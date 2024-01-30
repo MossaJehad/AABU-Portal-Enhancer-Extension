@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
     uicheckbox.addEventListener('change', function () {
         var UIEnabled = uicheckbox.checked;
 
-        chrome.storage.local.set({ 'UIEnabled': UIEnabled }, function () {
+        chrome.storage.local.set({ 'UIEnabled': UIEnabled }, async function () {
             if (!chrome.runtime.lastError) {
                 updateUI(UIEnabled);
 
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                const tabs = await chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     var tabId = tabs[0].id;
-                    chrome.tabs.executeScript(tabId, { code: '(' + addStatusHTML + ')()' });
+                    chrome.scripting.executeScript(tabId, { code: '(' + addStatusHTML + ')()' });
                 });
             } else {
                 console.error(chrome.runtime.lastError);
@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function updateUI(UIEnabled) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+async function updateUI(UIEnabled) {
+    const tabs = await chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var tabId = tabs[0].id;
-        chrome.tabs.executeScript(tabId, { code: code });
+        chrome.scripting.executeScript(tabId, { code: code });
     });
 }
 
