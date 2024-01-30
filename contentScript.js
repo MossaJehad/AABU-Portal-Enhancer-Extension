@@ -90,22 +90,21 @@ chrome.storage.local.get('UIEnabled', function(data) {
 
         let header = document.querySelector("#header");
         header.classList.remove("hed");
-        header.classList.add('is-flex', 'is-flex-direction-row', 'is-justify-content-space-between', 'is-flex-wrap-nowrap', 'is-align-items-center');
+        header.style.display = 'flex';
+        header.style.alignItems = 'center';
+        header.style.justifyContent ='space-between';
         header.style.backgroundColor = "#02828d";
         header.style.padding = "10px";
         header.style.marginBottom = "12px";
         header.style.height = '100px';
 
-        let linkDiv = document.createElement('div');
-        linkDiv.classList.add('is-flex', 'is-align-items-center'); 
-        linkDiv.style.margin = '12px';
-        linkDiv.style.marginLeft = '27px';
-
         let svgLink = document.createElement('a');
         svgLink.href = chrome.runtime.getURL('calculator/calc.html');
         svgLink.setAttribute("id", "calculator-link");
         svgLink.setAttribute("target", "_blank");
-
+        svgLink.style.display = 'flex';
+        svgLink.style.alignItems = 'center';
+        svgLink.style.margin = '12px'
         svgLink.addEventListener('click', function (event) {
             // event.preventDefault();
             chrome.runtime.sendMessage({ action: 'openCalculatorPage' });
@@ -133,8 +132,7 @@ chrome.storage.local.get('UIEnabled', function(data) {
         svgElement.appendChild(pathElement2);
 
         svgLink.appendChild(svgElement);
-        linkDiv.appendChild(svgLink);
-        header.appendChild(linkDiv);
+        header.appendChild(svgLink);
 
         document.querySelector('p.copRight').classList.add('has-text-white')
         document.querySelector('p.copRight').style.backgroundColor = '#02828d'
