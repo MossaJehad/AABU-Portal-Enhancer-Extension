@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const TotalHGPA = document.getElementById('TotalHGPA')
   const TotalHCGPA = document.getElementById('TotalHCGPA')
   const oldGrade = document.querySelector('select.old-grade')
+  const EstGPA = document.querySelector('#EstGPA')
+  const EstCGPA = document.querySelector('#EstCGPA')
   document.getElementById("grabData").addEventListener("click", fetchData);
 
   let addSubjectBtn = document.getElementById("addSubject");
@@ -220,33 +222,30 @@ function fetchData() {
     GPAOutput.textContent = ` ${GPA.toFixed(2)}`;
     TotalHGPA.textContent = `${totalHours}`;
     
+    const gradeEstimate = getGradeEstimate(GPA);
+    EstGPA.textContent = ` ${gradeEstimate}`;
+
     let regularCGPA = GPA;
 
     if (prevGPA.value && prevHours.value && totalOldGradePoints > 0) {
       const restudiedCGPA = ((parseFloat(prevGPA.value) * parseFloat(prevHours.value)) - totalOldGradePoints + totalGradePoints) / (parseFloat(prevHours.value) + (totalHours - totalOldHours));
       CGPAOutput.textContent = ` ${restudiedCGPA.toFixed(2)}`;
       TotalHCGPA.textContent = `${parseFloat(prevHours.value) + (totalHours - totalOldHours)}`
+      const gradeEstimate = getCGPAEstimate(restudiedCGPA);
+      EstCGPA.textContent = ` ${gradeEstimate}`;
     } else if (prevGPA.value && prevHours.value) { 
       regularCGPA = ((prevGPA.value * prevHours.value) + totalGradePoints) / (parseFloat(prevHours.value) + (totalHours))
       CGPAOutput.textContent = ` ${regularCGPA.toFixed(2)}`;
       TotalHCGPA.textContent = `${parseFloat(prevHours.value) + (totalHours)}`
+      const gradeEstimate = getCGPAEstimate(regularCGPA);
+      EstCGPA.textContent = ` ${gradeEstimate}`;
     } else {
       const standerCGPA = GPA;
       CGPAOutput.textContent = ` ${standerCGPA.toFixed(2)}`;
       TotalHCGPA.textContent = `${totalHours}`
+      const gradeEstimate = getCGPAEstimate(standerCGPA);
+      EstCGPA.textContent = ` ${gradeEstimate}`;
     }
-    console.log(`
-            PrevGPA:${prevGPA.value}
-            PrevHours:${prevHours.value}
-            TotalGradePoints:${totalGradePoints}
-            TotalHours:${totalHours}
-            TotalOldGradePoints:${totalOldGradePoints}
-            TotalOldHours:${totalOldHours}
-            GPA:${GPA}
-            CGPA:${regularCGPA}
-            TotalHGPA:${TotalHGPA.textContent}
-            TotalHCGPA:${TotalHCGPA.textContent}
-    `)
   }
 
   function getGradePoint(grade) {
@@ -277,6 +276,38 @@ function fetchData() {
         return 1.0;
       default:
         return NaN;
+    }
+  }
+
+  function getCGPAEstimate(CGPA) {
+    if (CGPA >= 3.50 && CGPA <= 4.00) {
+      return "ممتاز";
+    } else if (CGPA >= 3.00 && CGPA < 3.50) {
+      return "جيد جداً";
+    } else if (CGPA >= 2.50 && CGPA < 3.00) {
+      return "جيد";
+    } else if (CGPA >= 2.00 && CGPA < 2.50) {
+      return "مقبول";
+    } else if (CGPA < 2.00) {
+      return "ضعيف";
+    } else {
+      return "تقدير غير معروف";
+    }
+  }
+
+  function getGradeEstimate(GPA) {
+    if (GPA >= 3.50 && GPA <= 4.00) {
+      return "ممتاز";
+    } else if (GPA >= 3.00 && GPA < 3.50) {
+      return "جيد جداً";
+    } else if (GPA >= 2.50 && GPA < 3.00) {
+      return "جيد";
+    } else if (GPA >= 2.00 && GPA < 2.50) {
+      return "مقبول";
+    } else if (GPA < 2.00) {
+      return "ضعيف";
+    } else {
+      return "تقدير غير معروف";
     }
   }
 
