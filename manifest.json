@@ -20,11 +20,11 @@
   "permissions": [
     "storage",
     "tabs",
-    "nativeMessaging"
+    "nativeMessaging",
+    "scripting"
   ],
   "host_permissions": [
-    "https://student.aabu.edu.jo/nreg/*",
-    "*/calculator/calc.html"
+    "https://student.aabu.edu.jo/nreg/*"
   ],
   "icons": {
     "16": "images/icon16.png",
@@ -39,14 +39,6 @@
       "matches": ["https://student.aabu.edu.jo/nreg/*"]
     }
   ],
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y"
-      }
-    }
-  },
-  "scripts": ["popup.js"],
   "web_accessible_resources": [{
     "resources": ["popup.html", "popup.css", "calculator/calc.html"],
     "matches": ["*://*/*"],

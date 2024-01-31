@@ -55,7 +55,9 @@ async function updateDarkMode(darkModeEnabled) {
         }
     });`;
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      var tabId = tabs[0].id;
-      chrome.scripting.executeScript(tabId, { code: code });
+      chrome.scripting.executeScript({
+        target: {tabId : getTabId()},
+        code: code
+    });
   });
 }

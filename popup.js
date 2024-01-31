@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var passwordInput = document.getElementById('password');
   var togglePassword = document.querySelector('.toggle-password');
 
-  ///////
 function applyDarkModeStyles() {
     let bdy = document.querySelector('body');
     bdy.style.backgroundColor = '#242424';
@@ -82,7 +81,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
       }
   }
 });
-  ///////
 
   togglePassword.addEventListener('click', function () {
       var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -106,7 +104,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
       localStorage.setItem('studentId', studentIdInput.value);
       localStorage.setItem('studentPass', studentPass.value);
       chrome.storage.sync.set({ 'studentId': studentIdInput.value, 'studentPass': studentPass.value }, function () {
-        // console.log('Data stored successfully.');
       });
 
       saveButton.removeAttribute('disabled');
