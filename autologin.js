@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var autoLogin = document.getElementById('autologin');
+    let autoLogin = document.getElementById('autologin');
     
     autoLogin.addEventListener('change', function () {
         chrome.storage.sync.set({ autoLogin: this.checked });

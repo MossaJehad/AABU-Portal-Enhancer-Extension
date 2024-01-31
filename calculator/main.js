@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let numInputs = document.querySelectorAll(".numInput");
   numInputs.forEach((numInput) => {
     numInput.addEventListener("blur", function() {
-      var inputValue = parseFloat(numInput.value);
-      var min = parseFloat(numInput.min);
-      var max = parseFloat(numInput.max);
+      let inputValue = parseFloat(numInput.value);
+      let min = parseFloat(numInput.min);
+      let max = parseFloat(numInput.max);
 
       if (isNaN(inputValue) || inputValue < min) {
           numInput.value = min;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   })
 
-  var elements = document.querySelectorAll('.numInput');
+  let elements = document.querySelectorAll('.numInput');
   elements.forEach(function(element) {
     element.addEventListener('input', function() {
       if (prevGPA.value >= 1 && prevHours.value >= 1) {

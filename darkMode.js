@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
        
-        var checkbox = document.getElementById('darkModeCheckbox');
+        let checkbox = document.getElementById('darkModeCheckbox');
 
         chrome.storage.local.get('darkModeEnabled', function (data) {
             checkbox.checked = data.darkModeEnabled;
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         checkbox.addEventListener('change', function () {
-            var darkModeEnabled = checkbox.checked;
+            let darkModeEnabled = checkbox.checked;
 
             chrome.storage.local.set({ 'darkModeEnabled': darkModeEnabled }, function () {
                 if (!chrome.runtime.lastError) {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 async function updateDarkMode(darkModeEnabled) {
-    var code = darkModeEnabled
+    let code = darkModeEnabled
     ? `document.querySelectorAll('*').forEach((element) => { 
         if (element.tagName !== 'IMG') {
             element.originalBackgroundColor = window.getComputedStyle(element).backgroundColor;

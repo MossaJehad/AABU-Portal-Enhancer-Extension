@@ -71,7 +71,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.autoLogin) {
         autoLoginState = true;
-        var form = document.querySelector('.signin');
+        let form = document.querySelector('.signin');
         if (form) {
             form.submit();
         }

@@ -49,7 +49,7 @@ function isExamPage() {
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.autoLogin) {
-        var form = document.querySelector('.signin');
+        let form = document.querySelector('.signin');
         if (form) {
             form.submit();
         }
@@ -57,18 +57,18 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 });
 
 function autoSelectMiddleValueAndClickNext() {
-    var table = document.querySelector('form[name="f1"] table');
+    let table = document.querySelector('form[name="f1"] table');
 
     if (table) {
-        var rows = table.getElementsByTagName('tr');
-        var middleRowIndex = Math.floor(rows.length / 2);
-        var middleRow = rows[middleRowIndex];
+        let rows = table.getElementsByTagName('tr');
+        let middleRowIndex = Math.floor(rows.length / 2);
+        let middleRow = rows[middleRowIndex];
 
-        var radioButton = middleRow.querySelector('input[type="radio"]');
+        let radioButton = middleRow.querySelector('input[type="radio"]');
         if (radioButton) {
             radioButton.click();
 
-            var nextButton = document.querySelector('input[value="التالي"]');
+            let nextButton = document.querySelector('input[value="التالي"]');
             if (nextButton) {
                 nextButton.click();
             }

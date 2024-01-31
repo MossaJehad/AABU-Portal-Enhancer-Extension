@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
-  var form = document.getElementById('maincontainer');
-  var studentIdInput = form.querySelector('input[name="studentId"]');
-  var studentPass = form.querySelector('input[name="password"]');
-  var saveButton = form.querySelector('button');
-  var successMessage = document.getElementById('successMessage');
-  var storedStudentId = localStorage.getItem('studentId');
-  var storedStudentPass = localStorage.getItem('studentPass');
+  let form = document.getElementById('maincontainer');
+  let studentIdInput = form.querySelector('input[name="studentId"]');
+  let studentPass = form.querySelector('input[name="password"]');
+  let saveButton = form.querySelector('button');
+  let successMessage = document.getElementById('successMessage');
+  let storedStudentId = localStorage.getItem('studentId');
+  let storedStudentPass = localStorage.getItem('studentPass');
 
-  var autoLogin = document.querySelector('.autoLogin');
-  var betterUI = document.querySelector('.applyBetterUI');
-  var darkMode = document.querySelector('.darkMode');
+  let autoLogin = document.querySelector('.autoLogin');
+  let betterUI = document.querySelector('.applyBetterUI');
+  let darkMode = document.querySelector('.darkMode');
 
-  var passwordInput = document.getElementById('password');
-  var togglePassword = document.querySelector('.toggle-password');
+  let passwordInput = document.getElementById('password');
+  let togglePassword = document.querySelector('.toggle-password');
 
 function applyDarkModeStyles() {
     let bdy = document.querySelector('body');
@@ -83,7 +83,7 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 });
 
   togglePassword.addEventListener('click', function () {
-      var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      let type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
       passwordInput.setAttribute('type', type);
 
       togglePassword.classList.toggle('fa-eye');
