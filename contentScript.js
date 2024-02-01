@@ -6,20 +6,165 @@ if (window.location.href.startsWith('https://student.aabu.edu.jo/nreg//showPic.j
     }
 }
 
-chrome.storage.local.get('darkModeEnabled', function(data) {
-    if (data.darkModeEnabled) {
-        document.querySelectorAll('*').forEach((element) => { 
-            if (element.tagName !== 'IMG') {
-                element.originalBackgroundColor = window.getComputedStyle(element).backgroundColor;
-                element.style.backgroundColor = '#222';
-                element.style.color = '#fff';
-            } else {
-                element.style.backgroundColor = '';
-                element.style.color = '';
+function applyDarkModeStyles() {
+        document.querySelectorAll('*').forEach((element) => {
+            switch (element.tagName) {
+                case 'HTML':
+                case 'BODY':
+                    element.style.backgroundColor = '#171717';
+                    element.style.color = '#FFF';
+                break;
+                case 'IMG':
+                    element.style.backgroundColor = '';
+                    element.style.color = '';
+                break;
+                case 'A':
+                    element.style.color = '#B8C5FF';
+                    element.style.backgroundColor = '#171717';
+                break;
+                case 'BUTTON':
+                case 'INPUT':
+                    if (element.type === 'submit' || element.classList.contains('button')) {
+                        if (element.classList.contains('primary')) {
+                            element.style.backgroundColor = '#4CAF50';
+                            element.style.color = '#FFF';
+                        } else if (element.classList.contains('secondary')) {
+                            element.style.backgroundColor = '#757575';
+                            element.style.color = '#FFF';
+                        } else if (element.classList.contains('danger')) {
+                            element.style.backgroundColor = '#F44336';
+                            element.style.color = '#FFF';
+                        }
+                    } 
+                break;
+                case 'TABLE':
+                    element.style.backgroundColor = '#333333';
+                    element.style.color = '#FFF';
+                    element.querySelectorAll('tr').forEach((row, index) => {
+                        if (index % 2 === 0) {
+                            row.style.backgroundColor = '#424242';
+                        } else {
+                            row.style.backgroundColor = '#484848';
+                        }
+                        row.style.color = '#FFF';
+                    });
+                break;
+                case 'DIV': 
+                case 'NAV': 
+                case 'SECTION': 
+                    element.style.backgroundColor = '#171717';
+                    element.style.color = '#FFF';
+                break;
+                case 'LEGEND':
+                    element.style.color = '#FFF';
+                break;
+                default:
+                    element.originalBackgroundColor = window.getComputedStyle(element).backgroundColor;
+                break;
             }
         });
+        document.querySelectorAll('form[name="save_frm"]').forEach((form) => {
+            const lastInput = form.querySelector('input[type="submit"], input[type="button"]');
+            if (lastInput && lastInput.value === 'تخزين') {
+                lastInput.setAttribute('type', 'button');
+                lastInput.style.backgroundColor = '#757575';
+                lastInput.style.color = '#FFF';
+            }
+        });
+        let fbMainDiv = document.getElementById('fbMainDiv')
+        fbMainDiv.style.backgroundColor = '#171717'
+        fbMainDiv.style.color = '#FFF'
     }
-})
+function removeDarkModeStyles() {
+        document.querySelectorAll('*').forEach((element) => {
+            switch (element.tagName) {
+                case 'HTML':
+                case 'BODY':
+                    element.style.backgroundColor = '';
+                    element.style.color = '';
+                break;
+                case 'IMG':
+                    element.style.backgroundColor = '';
+                    element.style.color = '';
+                break;
+                case 'A':
+                    element.style.color = '';
+                    element.style.backgroundColor = '';
+                break;
+                case 'BUTTON':
+                case 'INPUT':
+                    if (element.type === 'submit' || element.classList.contains('button')) {
+                        if (element.classList.contains('primary')) {
+                            element.style.backgroundColor = '';
+                            element.style.color = '';
+                        } else if (element.classList.contains('secondary')) {
+                            element.style.backgroundColor = '';
+                            element.style.color = '';
+                        } else if (element.classList.contains('danger')) {
+                            element.style.backgroundColor = '';
+                            element.style.color = '';
+                        }
+                    } 
+                break;
+                case 'TABLE':
+                    element.style.backgroundColor = '';
+                    element.style.color = '';
+                    element.querySelectorAll('tr').forEach((row, index) => {
+                        if (index % 2 === 0) {
+                            row.style.backgroundColor = '';
+                        } else {
+                            row.style.backgroundColor = '';
+                        }
+                        row.style.color = '';
+                    });
+                break;
+                case 'DIV': 
+                case 'NAV': 
+                case 'SECTION': 
+                if(element.id === 'header'){
+                    element.style.backgroundColor = '#02828d';
+                } else {
+                    element.style.backgroundColor = '';
+                    element.style.color = '';
+                }
+                break;
+                case 'LEGEND':
+                    element.style.color = '';
+                break;
+                default:
+                    element.originalBackgroundColor = window.getComputedStyle(element).backgroundColor;
+                break;
+            }
+        });
+        document.querySelectorAll('form[name="save_frm"]').forEach((form) => {
+            const lastInput = form.querySelector('input[type="submit"], input[type="button"]');
+            if (lastInput && lastInput.value === 'تخزين') {
+                lastInput.setAttribute('type', 'button');
+                lastInput.style.backgroundColor = '';
+                lastInput.style.color = '';
+            }
+        });
+        let fbMainDiv = document.getElementById('fbMainDiv')
+        fbMainDiv.style.backgroundColor = ''
+        fbMainDiv.style.color = ''
+    }
+
+    chrome.storage.local.get('darkModeEnabled', function (data) {
+        if (data.darkModeEnabled) {
+            applyDarkModeStyles();
+        }
+      });
+      
+      chrome.storage.onChanged.addListener(function (changes, namespace) {
+        if (namespace === 'local' && 'darkModeEnabled' in changes) {
+            const newDarkModeState = changes.darkModeEnabled.newValue;
+            if (newDarkModeState) {
+                applyDarkModeStyles();
+            } else {
+                removeDarkModeStyles();
+            }
+        }
+      });
 
 chrome.runtime.sendMessage({ action: 'getAutoLoginState' }, function (response) {
         chrome.storage.sync.get(['studentId', 'studentPass', 'autoLogin'], function (result) {
@@ -177,26 +322,6 @@ chrome.storage.local.get('UIEnabled', function(data) {
         let aButton = document.querySelector('a[href="/nreg/dalel_mod2022_2023.pdf"]')
         aButton.classList.remove('btn')
         aButton.classList.add('button')
-
-        let additionalDiv = document.createElement('div');
-        additionalDiv.classList.add('card', 'mt-3');
-
-        let rowForSignOutLink = document.createElement('div');
-        rowForSignOutLink.classList.add('row');
-
-        let colForSignOutLink = document.createElement('div');
-        colForSignOutLink.classList.add('col-sm-12', 'has-text-centered');
-
-        let signOutLink = document.createElement('a');
-        signOutLink.setAttribute('href', 'https://student.aabu.edu.jo/nreg/SignOut');
-        signOutLink.setAttribute('target', '_self');
-        signOutLink.classList.add('button');
-        signOutLink.textContent = 'تسجيل الخروج';
-
-        colForSignOutLink.appendChild(signOutLink);
-        rowForSignOutLink.appendChild(colForSignOutLink);
-        additionalDiv.appendChild(rowForSignOutLink);
-        document.querySelector('.col-md-4.mb-3').appendChild(additionalDiv);
 
     }
 
