@@ -326,3 +326,4 @@ chrome.storage.local.get('UIEnabled', function(data) {
     }
 
 });
+console.log('Mossa Jehad')

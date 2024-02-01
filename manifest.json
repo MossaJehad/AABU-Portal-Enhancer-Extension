@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Portal Enhancer",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Portal Enhancer for AABU student portal",
   "action": {
     "default_popup": "popup.html",
