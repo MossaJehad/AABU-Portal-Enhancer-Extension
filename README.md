@@ -16,6 +16,10 @@ This extension is developed to enhance the user experience for students at Al Al
 
 This extension aims to optimize and streamline the interaction of students with the Al Al-Bayt University portal, offering a more efficient and pleasant online experience.
 
+## Installation:
+
+ - [latest release](https://chromewebstore.google.com/detail/portal-enhancer/mfhhcdmhoafkojnllcgoipafikndgjjo)
+
 ## Screenshots:
 
 - Extension user interface
