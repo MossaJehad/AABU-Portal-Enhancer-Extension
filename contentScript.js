@@ -47,6 +47,14 @@ function applyDarkModeStyles() {
                             row.style.backgroundColor = '#484848';
                         }
                         row.style.color = '#FFF';
+                        row.querySelectorAll('td').forEach((cell, index) => {
+                            if (index % 2 === 0) {
+                                cell.style.backgroundColor = '#424242';
+                            } else {
+                                cell.style.backgroundColor = '#484848';
+                            }
+                            cell.style.color = '#FFF';
+                        });
                     });
                 break;
                 case 'DIV': 
@@ -116,6 +124,14 @@ function removeDarkModeStyles() {
                             row.style.backgroundColor = '';
                         }
                         row.style.color = '';
+                        row.querySelectorAll('td').forEach((cell, index) => {
+                            if (index % 2 === 0) {
+                                cell.style.backgroundColor = '';
+                            } else {
+                                cell.style.backgroundColor = '';
+                            }
+                            cell.style.color = '';
+                        });
                     });
                 break;
                 case 'DIV': 
